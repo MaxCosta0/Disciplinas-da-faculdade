@@ -4,7 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0e8f92a1-257c-4a2f-a3de-625bc55360bc" name="Changes" comment="" />
+    <list default="true" id="0e8f92a1-257c-4a2f-a3de-625bc55360bc" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/State/src/com/maxley/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/State/src/com/maxley/ataque/Ataque.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/State/src/com/maxley/ataque/AtaqueForte.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/State/src/com/maxley/ataque/AtaqueFraco.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/State/src/com/maxley/ataque/AtaqueMedio.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/State/src/com/maxley/corrida/Corrida.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/State/src/com/maxley/corrida/CorridaDevagar.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/State/src/com/maxley/corrida/CorridaMedio.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/State/src/com/maxley/corrida/CorridaRapido.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/State/src/com/maxley/personagem/Personagem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/State/src/com/maxley/personagem/Personagem1.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/State/src/com/maxley/personagem/Personagem2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/State/src/com/maxley/personagem/Personagem3.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/State/src/com/maxley/pulo/Pulo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/State/src/com/maxley/pulo/PuloAlto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/State/src/com/maxley/pulo/PuloBaixo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/State/src/com/maxley/pulo/PuloMedio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,7 +44,12 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/State/src/com/maxley" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\maxle\Documents\UFU\Disciplinas-da-faculdade\ProgramacaoOrientadaAObjetos\State\src\com\maxley" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -57,5 +81,16 @@
       <updated>1639772384814</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
