@@ -1,12 +1,12 @@
 package com.maxley;
 
-import com.maxley.personagem.Personagem1;
+import com.maxley.personagem.ConcreteCharacter;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        Personagem1 personagem1 = new Personagem1();
+        ConcreteCharacter personagem1 = new ConcreteCharacter();
 
         System.out.println("Atributos estado inicial: ");
         System.out.println("Energia: " + personagem1.getEnergia());          // Energia: 70
