@@ -25,7 +25,7 @@ public abstract class Enemy implements Observer {
 
         if ((characterPositionX - this.positionX == 0) && (characterPositionY - this.positionY == 0)) {
             //TODO: Inimigo bate no personagem;
-            character.setLifePoints(-attackDamage);
+            character.setLifePoints(character.getLifePoints()-attackDamage);
 
         } else {
             //TODO: Inimigo chega mais proximo do personagem;

@@ -1,7 +1,7 @@
 package com.maxley.attack;
 
 public class StrongAttack implements Attack {
-    private Integer damage = 50;
+    private Integer damage = 10;
 
     public int toAttack() {
         return this.damage;

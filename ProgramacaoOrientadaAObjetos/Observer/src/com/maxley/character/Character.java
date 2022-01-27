@@ -1,7 +1,10 @@
 package com.maxley.character;
 
 import com.maxley.attack.Attack;
+import com.maxley.attack.StrongAttack;
 import com.maxley.enemy.Enemy;
+import com.maxley.jump.HighJump;
+import com.maxley.speed.HighSpeed;
 import com.maxley.state.State;
 import com.maxley.state.StrongState;
 import com.maxley.observer.Observable;
@@ -22,14 +25,118 @@ public abstract class Character implements Observable {
     private Integer positionX;
     private Integer positionY;
 
-    public Character(Attack attack, Jump jump, Speed speed, Integer lifePoints, Integer positionX, Integer positionY) {
-        this.attack = attack;
-        this.jump = jump;
-        this.speed = speed;
+    public Character(Integer positionX, Integer positionY) {
         this.state = new StrongState(this);
-        this.lifePoints = lifePoints;
+        this.attack = new StrongAttack();
+        this.speed = new HighSpeed();
+        this.jump = new HighJump();
+        this.lifePoints = 100;
         this.positionX = positionX;
         this.positionY = positionY;
+    }
+
+    // Observer Pattern methods IN -->
+
+    @Override
+    public void addObserver(Observer observer) {
+        this.observers.add((observer));
+    }
+
+    @Override
+    public void removeObserver(Observer observer) {
+        this.observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers() {
+        this.observers.forEach((observer) -> observer.update(this));
+    }
+
+    // Observer Pattern methods OUT -->
+
+    //Character actions IN -->
+
+    public void toAttack() {        //trigged when <<Space Bar>> pressed
+
+        for (int i = 0; i < this.observers.size(); i++) {
+            Enemy enemy = (Enemy) this.observers.get(i);
+
+            if ((enemy.getPositionX() - this.positionX <= 2) && (enemy.getPositionY() - this.positionY <= 2)) {
+
+                int enemyNewLifePoints = enemy.getLifePoints() - this.attack.toAttack();
+
+                if (enemyNewLifePoints <= 0) {
+                    observers.remove(enemy);
+                } else {
+                    enemy.setLifePoints(enemyNewLifePoints);
+                }
+            }
+        }
+    }
+
+    public void toJump() {
+        jump.toJump();
+    }
+
+    public void run() {
+        speed.run();
+    }
+
+    //Character actions OUT -->
+
+    public void show() {
+        notifyObservers();
+    }
+
+    // Getters And Setters IN -->
+
+    public Attack getAttack() {
+        return attack;
+    }
+
+    public void setAttack(Attack attack) {
+        this.state.setAttack();
+    }
+
+    public Jump getJump() {
+        return jump;
+    }
+
+    public void setJump(Jump jump) {
+        this.jump = jump;
+    }
+
+    public Speed getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(Speed speed) {
+        this.state.setSpeed();
+    }
+
+    public Integer getLifePoints() {
+        return lifePoints;
+    }
+
+    public void setLifePoints(Integer lifePoints) {
+        this.lifePoints = lifePoints;
+        this.state.verifyChangeState();
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public List<Observer> getObservers() {
+        return observers;
+    }
+
+    public void setObservers(List<Observer> observers) {
+        this.observers = observers;
     }
 
     public Integer getPositionX() {
@@ -48,83 +155,6 @@ public abstract class Character implements Observable {
         this.positionY = positionY;
     }
 
-    public void setAttack(Attack attack) {
-        this.attack = attack;
-    }
-
-    public void setJump(Jump jump) {
-        this.jump = jump;
-    }
-
-    public void setSpeed(Speed corrida) {
-        this.speed = corrida;
-    }
-
-    public void setLifePoints(Integer lifePoints) {
-        this.lifePoints = lifePoints;
-    }
-
-    public Integer getLifePoints() {
-        return lifePoints;
-    }
-
-    public void setState(State state) {
-        this.state = state;
-    }
-
-    @Override
-    public String toString() {
-        return super.toString();
-    }
-
-    @Override
-    public void addObserver(Observer observer) {
-        this.observers.add((observer));
-    }
-
-    @Override
-    public void removeObserver(Observer observer) {
-        this.observers.remove(observer);
-    }
-
-    @Override
-    public void notifyObservers() {
-        this.observers.forEach((observer) -> observer.update(this));
-    }
-
-    public State getState() {
-        return state;
-    }
-
-    public void toAttack() {        //Triggado quando aperta <<Barra De Espaço>>
-
-        this.observers.forEach(observer -> {
-
-            Enemy enemy = (Enemy) observer;
-
-            if ((enemy.getPositionX() - this.positionX == 0) && (enemy.getPositionY() - this.positionY == 0)) {
-
-                int enemyNewLifePoints = enemy.getLifePoints() - this.attack.toAttack();
-
-                if (enemyNewLifePoints <= 0) {
-                    observers.remove(enemy);
-                } else {
-                    enemy.setLifePoints(enemyNewLifePoints);
-                }
-            }
-        });
-    }
-
-    public void toJump() {
-        jump.toJump();
-    }
-
-    public void run() {
-        speed.run();
-    }
-
-    public void show(){
-        notifyObservers();
-    }
+    // Getters And Setters OUT -->
 
 }

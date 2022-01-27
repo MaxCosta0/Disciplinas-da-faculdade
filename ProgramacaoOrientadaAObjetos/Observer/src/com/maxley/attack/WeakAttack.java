@@ -1,7 +1,7 @@
 package com.maxley.attack;
 
 public class WeakAttack implements Attack{
-    private int damage = 10;
+    private int damage = 2;
 
     public Integer getDamage() {
         return damage;

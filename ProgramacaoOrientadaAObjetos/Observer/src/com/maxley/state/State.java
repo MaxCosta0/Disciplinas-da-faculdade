@@ -13,15 +13,19 @@ public abstract class State {
         setLifePointsLimits();
     }
 
+    // State specific methods IN -->
+
     protected void setLifePointsLimits(){};
-    protected void verifyChangeState(){};
+    public void verifyChangeState(){};
+    public void setAttack(){};
+    public void setSpeed(){};
+
+    // State specific methods OUT -->
+
+    // Getters And Setters IN -->
 
     public Character getCharacter() {
         return character;
-    }
-
-    public void setCharacter(Character character) {
-        this.character = character;
     }
 
     public int getMaxLifePoints() {
@@ -39,4 +43,6 @@ public abstract class State {
     public void setMinLifePoints(int minLifePoints) {
         this.minLifePoints = minLifePoints;
     }
+
+    // Getters And Setters OUT -->
 }

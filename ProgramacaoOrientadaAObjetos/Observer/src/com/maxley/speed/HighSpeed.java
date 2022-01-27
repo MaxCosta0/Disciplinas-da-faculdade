@@ -1,8 +1,9 @@
 package com.maxley.speed;
 
 public class HighSpeed implements Speed {
+    int speed = 10;
 
-    public void run() {
-        System.out.println("Corrida Rapido");
+    public int run() {
+        return speed;
     }
 }

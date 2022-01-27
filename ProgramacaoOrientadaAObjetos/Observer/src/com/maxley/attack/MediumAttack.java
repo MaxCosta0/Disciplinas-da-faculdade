@@ -1,7 +1,7 @@
 package com.maxley.attack;
 
 public class MediumAttack implements Attack {
-    private int damage = 30;
+    private int damage = 5;
 
     public Integer getDamage() {
         return damage;

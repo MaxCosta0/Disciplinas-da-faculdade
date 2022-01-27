@@ -1,8 +1,9 @@
 package com.maxley.speed;
 
 public class LowSpeed implements Speed {
+    int speed = 2;
 
-    public void run() {
-        System.out.println("Corrida Lenta");
+    public int run() {
+       return speed;
     }
 }
