@@ -6,9 +6,9 @@ import java.util.List;
 public interface Observable {
     List<Observer> observers = new ArrayList<>();
 
-    public void subscribe(Observer observer);
+    void addObserver(Observer observer);
 
-    public void unsubscribe(Observer observer);
+    void removeObserver(Observer observer);
 
-    public void publish();
+    void notifyObservers();
 }

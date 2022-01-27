@@ -1,53 +1,13 @@
 package com.maxley;
 
-import com.maxley.personagem.ConcreteCharacter;
+import com.maxley.game.Game;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
-        ConcreteCharacter personagem1 = new ConcreteCharacter();
+       Game game = new Game();
 
-        System.out.println("Atributos estado inicial: ");
-        System.out.println("Energia: " + personagem1.getEnergia());          // Energia: 70
-        System.out.println("Estado: " + personagem1.getEstado());
-        personagem1.pular();
-        personagem1.correr();
-        personagem1.atacar();
-        System.out.println();
-
-        System.out.println("Atributos apos se curar 1 ponto de energia");
-        personagem1.getEstado().alteraEnergia(1);                  // Energia: 71
-        System.out.println("Energia: " + personagem1.getEnergia());
-        System.out.println("Estado: " + personagem1.getEstado());
-        personagem1.pular();
-        personagem1.correr();
-        personagem1.atacar();
-        System.out.println();
-
-        System.out.println("Atributos apos perder 41 pontos de energia");
-        personagem1.getEstado().alteraEnergia(-41);                 // Energia: 30
-        System.out.println("Energia: " + personagem1.getEnergia());
-        System.out.println("Estado: " + personagem1.getEstado());
-        personagem1.pular();
-        personagem1.correr();
-        personagem1.atacar();
-        System.out.println();
-
-        System.out.println("Atributos apos perder 29 pontos de energia ");
-        personagem1.getEstado().alteraEnergia(-29);                 // Energia: 1
-        System.out.println("Energia: " + personagem1.getEnergia());
-        personagem1.pular();
-        personagem1.correr();
-        personagem1.atacar();
-        System.out.println();
-
-        System.out.println("Atributos apos perder 1 pontos de energia ");
-        personagem1.getEstado().alteraEnergia(-1);                 // Energia: 0
-        System.out.println("Energia: " + personagem1.getEnergia());
-        personagem1.pular();
-        personagem1.correr();
-        personagem1.atacar();
-        System.out.println();
+       game.jogar(game);
     }
 }
