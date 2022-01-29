@@ -4,13 +4,15 @@ import com.maxley.attack.Attack;
 import com.maxley.attack.StrongAttack;
 import com.maxley.enemy.Enemy;
 import com.maxley.jump.HighJump;
-import com.maxley.speed.HighSpeed;
-import com.maxley.state.State;
-import com.maxley.state.StrongState;
+import com.maxley.jump.Jump;
 import com.maxley.observer.Observable;
 import com.maxley.observer.Observer;
-import com.maxley.jump.Jump;
+import com.maxley.shield.ConcreteShield;
+import com.maxley.shield.Shield;
+import com.maxley.speed.HighSpeed;
 import com.maxley.speed.Speed;
+import com.maxley.state.State;
+import com.maxley.state.StrongState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +26,7 @@ public abstract class Character implements Observable {
     private List<Observer> observers = new ArrayList<>();
     private Integer positionX;
     private Integer positionY;
+    private Shield firstShield;
 
     public Character(Integer positionX, Integer positionY) {
         this.state = new StrongState(this);
@@ -33,6 +36,8 @@ public abstract class Character implements Observable {
         this.lifePoints = 100;
         this.positionX = positionX;
         this.positionY = positionY;
+
+        this.firstShield = new ConcreteShield(10);
     }
 
     // Observer Pattern methods IN -->
@@ -78,29 +83,35 @@ public abstract class Character implements Observable {
         jump.toJump();
     }
 
-    public void run() {
-        speed.run();
+    public int run() {
+        return speed.run();
     }
 
-    public void getDamage(int newLifePoints){
+    public void addShield(int shield) {
+        this.firstShield.addShield(shield);
+    }
 
-        System.out.println("=====================================================================");
-
-        this.setLifePoints(newLifePoints);
-        this.state.verifyChangeState();
+    public void getDamage(int attackDamage) {
+        System.out.println("=================================================\n");
 
         System.out.println("LifePoints: " + this.lifePoints);
+        System.out.println("AttackDamage: " + attackDamage);
+        System.out.println("Shield: " + this.firstShield.countShieldAbsorb(0));
 
-        System.out.println("=====================================================================");
+        int remainDamage = this.firstShield.absorbDamageAndReturnRemainDamage(attackDamage);
+
+
+        System.out.println("Absorbed damage: " + (attackDamage - remainDamage));
+        System.out.println("Remain Damage:  " + remainDamage);
+
+        if(remainDamage > 0 ){
+            setLifePoints(this.lifePoints - attackDamage);
+        }
+
+        System.out.println("=================================================\n");
     }
 
     //Character actions OUT -->
-
-    public void show() {
-        notifyObservers();
-
-
-    }
 
     // Getters And Setters IN -->
 
@@ -134,6 +145,7 @@ public abstract class Character implements Observable {
 
     public void setLifePoints(Integer lifePoints) {
         this.lifePoints = lifePoints;
+        this.state.verifyChangeState();
     }
 
     public State getState() {
@@ -168,6 +180,18 @@ public abstract class Character implements Observable {
         this.positionY = positionY;
     }
 
+    public Shield getFirstShield() {
+        return firstShield;
+    }
+
+    public void setFirstShield(Shield firstShield) {
+        this.firstShield = firstShield;
+    }
+
     // Getters And Setters OUT -->
 
+    public void show() {
+        notifyObservers();
+
+    }
 }

@@ -1,18 +1,19 @@
 package com.maxley.enemy;
 
+import com.maxley.attack.Attack;
 import com.maxley.observer.Observable;
 import com.maxley.observer.Observer;
 import com.maxley.character.Character;
 
 public abstract class Enemy implements Observer {
 
-    private Integer attackDamage;
+    private Attack attack;
     private Integer lifePoints;
     private Integer positionX;
     private Integer positionY;
 
-    public Enemy(Integer attackDamage, Integer lifePoints, Integer positionX, Integer positionY){
-        this.attackDamage = attackDamage;
+    public Enemy(Attack attack, Integer lifePoints, Integer positionX, Integer positionY){
+        this.attack = attack;
         this.lifePoints = lifePoints;
         this.positionX = positionX;
         this.positionY = positionY;
@@ -24,7 +25,7 @@ public abstract class Enemy implements Observer {
         Integer characterPositionY = character.getPositionY();
 
         if ((characterPositionX - this.positionX == 0) && (characterPositionY - this.positionY == 0)) {
-            character.getDamage(character.getLifePoints()-attackDamage);
+            character.getDamage(attack.toAttack());
 
         } else {
             this.positionX += (characterPositionX - this.positionX) > 0 ? (int)(5*Math.random()) : (int)((-5)*Math.random());       // Se a diferença da posição em x do personagem e do inimigo for positiva,
@@ -50,12 +51,12 @@ public abstract class Enemy implements Observer {
         this.positionY = positionY;
     }
 
-    public Integer getAttackDamage() {
-        return attackDamage;
+    public Attack getAttack() {
+        return attack;
     }
 
-    public void setAttackDamage(Integer attackDamage) {
-        this.attackDamage = attackDamage;
+    public void setAttack(Attack attack) {
+        this.attack = attack;
     }
 
     public Integer getLifePoints() {
