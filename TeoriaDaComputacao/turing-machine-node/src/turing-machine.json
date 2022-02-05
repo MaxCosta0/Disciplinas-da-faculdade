@@ -1,0 +1,29 @@
+[
+  {
+    "states": ["q0", "q1", "q2", "qf"],
+    "alphabet": ["0", "1"],
+    "symbols": ["0", "1", "X", "Y", "&"],
+    "transitionFunction": [],
+    "initialState": "q0",
+    "blankSymbol": "&",
+    "finalStates": ["qf"]
+  },
+  {
+    "states": ["q0", "q1", "q2", "qf"],
+    "alphabet": ["0", "1"],
+    "symbols": ["0", "1", "X", "Y", "&"],
+    "transitionFunction": [],
+    "initialState": "q0",
+    "blankSymbol": "&",
+    "finalStates": ["qf"]
+  },
+  {
+    "states": ["q0", "q1", "q2", "qf"],
+    "alphabet": ["0", "1"],
+    "symbols": ["0", "1", "X", "Y", "&"],
+    "transitionFunction": [],
+    "initialState": "q0",
+    "blankSymbol": "&",
+    "finalStates": ["qf"]
+  }
+]
