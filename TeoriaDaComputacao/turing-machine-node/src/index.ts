@@ -64,7 +64,7 @@ export const mapTransitionFunction = (transitionFunction: string[]): Map<string,
 
 export const runTuringMachine = (turingMachine: TuringMachine, word: string): void => {
     const transitionFunctionMap = mapTransitionFunction(turingMachine.transitionFunction);
-    
+
     let acceptWord: boolean = true;
     let actualState = turingMachine.initialState;
     let now: string = '';
@@ -84,7 +84,7 @@ export const runTuringMachine = (turingMachine: TuringMachine, word: string): vo
         now = wordArray.toString()
             .replace(/,/g, '');
 
-        process.stdout.write(now + " -> ");
+        process.stdout.write(now + " -| ");
 
         const rightSide = transitionFunctionMap.get(`(${actualState}, ${readChar})`);
 
