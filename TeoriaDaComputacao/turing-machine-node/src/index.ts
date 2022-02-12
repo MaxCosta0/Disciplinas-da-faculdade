@@ -7,9 +7,6 @@ interface NextStep {
     goTo: string;
 }
 
-const jsonObject = FileHandler.readFile('./turing-machine.json');
-const turingMachine = TuringMachine.convertFromJson(jsonObject);
-
 /*
 *   Separa funcao de transicao em duas partes (antes e depois de ->)
 *   @param {string} - Funcao de transicao da maquina de turing na forma de string. Exemplo:
@@ -67,32 +64,50 @@ export const mapTransitionFunction = (transitionFunction: string[]): Map<string,
 
 export const runTuringMachine = (turingMachine: TuringMachine, word: string): void => {
     const transitionFunctionMap = mapTransitionFunction(turingMachine.transitionFunction);
+    
     let acceptWord: boolean = true;
     let actualState = turingMachine.initialState;
+    let now: string = '';
+    let index: number = 0;
     const wordArray = word.split('');
-    wordArray.push('B');
+
+    console.log(turingMachine);
 
     console.log(`Input: ${word}`);
 
-    for (let i = 0; i < wordArray.length; i++) {
-        const char = wordArray[i];
+    for (index = 0; index < wordArray.length; index++) {
 
+        const readChar = wordArray[index];
 
-        const rightSide = transitionFunctionMap.get(`(${actualState}, ${char})`);
+        wordArray[index] = `(${actualState})` + wordArray[index];
 
-        if(rightSide === undefined){
-            acceptWord = false;
+        now = wordArray.toString()
+            .replace(/,/g, '');
+
+        process.stdout.write(now + " -> ");
+
+        const rightSide = transitionFunctionMap.get(`(${actualState}, ${readChar})`);
+
+        if(rightSide === undefined){            //Se nao existe esta funcao de transição
             break;
         }
 
         const transitionFunctionFormatted = formatTransitionFunction(rightSide);
-
         const {state, write, goTo} = transitionFunctionFormatted!;
 
         actualState = state!;
-        wordArray[i] = write!;
+        wordArray[index] = write!;
 
-        if (goTo === 'L') i -= 2;
+        if (goTo === 'L') index -= 2;
+    }
+
+    wordArray[index--] = wordArray[index--] +  `(${actualState})`;
+
+    console.log(wordArray.toString()
+        .replace(/,/g, ''));
+
+    if(!turingMachine.finalStates.includes(actualState)){       //Se nao parou em um estado final
+        acceptWord = false;
     }
 
     const formattedOutput = wordArray.toString()
@@ -104,4 +119,8 @@ export const runTuringMachine = (turingMachine: TuringMachine, word: string): vo
     console.log(`Output: ${formattedOutput}`);
 }
 
-runTuringMachine(turingMachine, '010');
+//Inicio do programa
+const jsonObject = FileHandler.readFile('./turing-machine.json');
+const turingMachine = TuringMachine.convertFromJson(jsonObject);
+
+runTuringMachine(turingMachine, '010B');
