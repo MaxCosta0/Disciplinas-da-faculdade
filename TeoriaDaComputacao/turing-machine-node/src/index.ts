@@ -101,18 +101,26 @@ export const runTuringMachine = (turingMachine: TuringMachine, word: string): vo
         if (goTo === 'L') index -= 2;
     }
 
-    wordArray[index--] = wordArray[index--] +  `(${actualState})`;
-
-    console.log(wordArray.toString()
-        .replace(/,/g, ''));
+    let formattedOutput: string;
 
     if(!turingMachine.finalStates.includes(actualState)){       //Se nao parou em um estado final
         acceptWord = false;
-    }
 
-    const formattedOutput = wordArray.toString()
-        .replace(/,/g, '')          //Retira as virgulas da resposta
-        .substring(0, wordArray.length - 1);               //Retira o caractere B da resposta
+        formattedOutput = wordArray.toString()
+            .replace(/,/g, '')          //Retira as virgulas da resposta
+
+        console.log();
+    }else{
+        index--;
+        wordArray[index] = wordArray[index] +  `(${actualState})` + 'B'; index--;
+
+        console.log(wordArray.toString()
+            .replace(/,/g, ''));        //Formata a ultima saida da maquina
+
+        formattedOutput = wordArray.toString()
+            .replace(/,/g, '')          //Retira as virgulas da resposta
+            .substring(0, wordArray.length);               //Retira o caractere B da resposta
+    }
 
     console.log(`Result: ${acceptWord ? 'Accepted' : 'Rejected'}`);
 
@@ -123,4 +131,4 @@ export const runTuringMachine = (turingMachine: TuringMachine, word: string): vo
 const jsonObject = FileHandler.readFile('./turing-machine.json');
 const turingMachine = TuringMachine.convertFromJson(jsonObject);
 
-runTuringMachine(turingMachine, '010B');
+runTuringMachine(turingMachine, '00110B');
