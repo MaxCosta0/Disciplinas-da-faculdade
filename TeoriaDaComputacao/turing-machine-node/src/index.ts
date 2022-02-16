@@ -77,11 +77,18 @@ export const runTuringMachine = (turingMachine: TuringMachine, word: string): vo
 
     for (index = 0; index < wordArray.length; index++) {
 
-        const readChar = wordArray[index];
+        let readChar: string;
 
-        wordArray[index] = `(${actualState})` + wordArray[index];
+        if(index < 0 ){
+            readChar = 'B';
+        }else {
+            readChar = wordArray[index];
+            wordArray[index] = `(${actualState})` + wordArray[index];       //  '0' -> '(q0)0'
+        }
 
-        now = wordArray.toString()
+        // readChar = wordArray[index];
+
+        now = wordArray.toString()                                      //  ['(q0)0', '1', '0'] -> (q0)010
             .replace(/,/g, '');
 
         process.stdout.write(now + " -| ");
@@ -89,6 +96,8 @@ export const runTuringMachine = (turingMachine: TuringMachine, word: string): vo
         const rightSide = transitionFunctionMap.get(`(${actualState}, ${readChar})`);
 
         if(rightSide === undefined){            //Se nao existe esta funcao de transição
+            wordArray[index] = readChar;
+            index++;
             break;
         }
 
@@ -111,15 +120,17 @@ export const runTuringMachine = (turingMachine: TuringMachine, word: string): vo
 
         console.log();
     }else{
+
+        formattedOutput = wordArray.toString()
+            .replace(/,/g, '')          //Retira as virgulas da resposta
+
         index--;
-        wordArray[index] = wordArray[index] +  `(${actualState})` + 'B'; index--;
+        const char = wordArray[index];
+        wordArray[index] = wordArray[index] +  `(${actualState})`;
 
         console.log(wordArray.toString()
             .replace(/,/g, ''));        //Formata a ultima saida da maquina
 
-        formattedOutput = wordArray.toString()
-            .replace(/,/g, '')          //Retira as virgulas da resposta
-            .substring(0, wordArray.length);               //Retira o caractere B da resposta
     }
 
     console.log(`Result: ${acceptWord ? 'Accepted' : 'Rejected'}`);
@@ -131,4 +142,4 @@ export const runTuringMachine = (turingMachine: TuringMachine, word: string): vo
 const jsonObject = FileHandler.readFile('./turing-machine.json');
 const turingMachine = TuringMachine.convertFromJson(jsonObject);
 
-runTuringMachine(turingMachine, '00110B');
+runTuringMachine(turingMachine, 'abacabaB');
