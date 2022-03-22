@@ -1,16 +1,18 @@
-package com.maxley.factory;
+package com.maxley.character;
 
 import com.maxley.character.Character;
 import com.maxley.character.ConcreteCharacter;
 import com.maxley.decorator.FireDamage;
 import com.maxley.decorator.IceDamage;
 import com.maxley.decorator.PoisonDamage;
+import com.maxley.factory.CharacterFactoryMethod;
 import com.maxley.state.DangerState;
 import com.maxley.state.NormalState;
 import com.maxley.state.StrongState;
 
 public class MedievalCharacterFactory extends CharacterFactoryMethod {
 
+    private static final MedievalCharacterFactory instance = new MedievalCharacterFactory();
 
     public Character createCharacter(double type) {
         Character character = new ConcreteCharacter(0, 0);
@@ -33,5 +35,9 @@ public class MedievalCharacterFactory extends CharacterFactoryMethod {
         }
 
         return character;
+    }
+
+    public MedievalCharacterFactory getInstance() {
+        return instance;
     }
 }

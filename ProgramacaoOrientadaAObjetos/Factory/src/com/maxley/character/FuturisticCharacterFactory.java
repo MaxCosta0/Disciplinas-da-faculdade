@@ -1,15 +1,16 @@
-package com.maxley.factory;
+package com.maxley.character;
 
-import com.maxley.character.Character;
-import com.maxley.character.ConcreteCharacter;
 import com.maxley.decorator.EnergyKatanaDamage;
 import com.maxley.decorator.GranadeNoseDamage;
 import com.maxley.decorator.LaserDamage;
+import com.maxley.factory.CharacterFactoryMethod;
 import com.maxley.state.DangerState;
 import com.maxley.state.NormalState;
 import com.maxley.state.StrongState;
 
 public class FuturisticCharacterFactory extends CharacterFactoryMethod {
+
+    private static final FuturisticCharacterFactory instance = new FuturisticCharacterFactory();
 
     public Character createCharacter(double type) {
         Character character = new ConcreteCharacter(0, 0);
@@ -32,5 +33,9 @@ public class FuturisticCharacterFactory extends CharacterFactoryMethod {
         }
 
         return character;
+    }
+
+    public FuturisticCharacterFactory getInstance() {
+        return instance;
     }
 }

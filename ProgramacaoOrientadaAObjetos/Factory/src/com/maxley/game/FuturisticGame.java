@@ -7,7 +7,8 @@ import com.maxley.decorator.EnergyKatanaDamage;
 import com.maxley.decorator.GranadeNoseDamage;
 import com.maxley.decorator.LaserDamage;
 import com.maxley.enemy.ConcreteEnemy;
-import com.maxley.factory.FuturisticCharacterFactory;
+import com.maxley.character.FuturisticCharacterFactory;
+import com.maxley.factory.GameAbstractFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,8 +21,13 @@ public class FuturisticGame extends GameAbstractFactory {
     private ConcreteEnemy clown;
     private ConcreteEnemy robot;
     private ConcreteEnemy samurai;
-
     private Character player1;
+
+    private static final FuturisticGame instance = new FuturisticGame();
+
+    public FuturisticGame getInstance() {
+        return instance;
+    }
 
     public void createCharacter() {
         double randomNumber = Math.random();

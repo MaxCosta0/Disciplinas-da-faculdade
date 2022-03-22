@@ -1,4 +1,4 @@
-package com.maxley.game;
+package com.maxley.factory;
 
 import javax.swing.*;
 

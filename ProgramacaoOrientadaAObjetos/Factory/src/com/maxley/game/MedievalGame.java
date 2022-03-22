@@ -3,12 +3,12 @@ package com.maxley.game;
 import com.maxley.attack.MediumAttack;
 import com.maxley.attack.WeakAttack;
 import com.maxley.character.Character;
-import com.maxley.character.ConcreteCharacter;
+import com.maxley.character.MedievalCharacterFactory;
 import com.maxley.decorator.FireDamage;
 import com.maxley.decorator.IceDamage;
 import com.maxley.decorator.PoisonDamage;
 import com.maxley.enemy.ConcreteEnemy;
-import com.maxley.factory.MedievalCharacterFactory;
+import com.maxley.factory.GameAbstractFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,6 +22,12 @@ public class MedievalGame extends GameAbstractFactory {
     private ConcreteEnemy necromorph;
     private ConcreteEnemy vampire;
     private Character player1;
+
+    private static final MedievalGame instance = new MedievalGame();
+
+    public MedievalGame getInstance() {
+        return instance;
+    }
 
     public void createCharacter() {
         double randomNumber = Math.random();

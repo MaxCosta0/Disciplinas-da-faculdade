@@ -1,15 +1,19 @@
-package com.maxley.factory;
+package com.maxley.enemy;
 
 import com.maxley.character.Character;
 import com.maxley.character.ConcreteCharacter;
+import com.maxley.character.FuturisticCharacterFactory;
 import com.maxley.decorator.FireDamage;
 import com.maxley.decorator.IceDamage;
 import com.maxley.decorator.PoisonDamage;
+import com.maxley.factory.CharacterFactoryMethod;
 import com.maxley.state.DangerState;
 import com.maxley.state.NormalState;
 import com.maxley.state.StrongState;
 
 public class MedievalEnemyFactory extends CharacterFactoryMethod {
+
+    public static final MedievalEnemyFactory instance = new MedievalEnemyFactory();
 
     //TODO: Modificar para criar inimigos
     public Character createCharacter(double type) {
@@ -33,5 +37,9 @@ public class MedievalEnemyFactory extends CharacterFactoryMethod {
         }
 
         return character;
+    }
+
+    public MedievalEnemyFactory getInstance() {
+        return instance;
     }
 }

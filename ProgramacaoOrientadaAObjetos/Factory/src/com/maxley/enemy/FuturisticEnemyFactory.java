@@ -1,15 +1,19 @@
-package com.maxley.factory;
+package com.maxley.enemy;
 
 import com.maxley.character.Character;
 import com.maxley.character.ConcreteCharacter;
+import com.maxley.character.FuturisticCharacterFactory;
 import com.maxley.decorator.EnergyKatanaDamage;
 import com.maxley.decorator.GranadeNoseDamage;
 import com.maxley.decorator.LaserDamage;
+import com.maxley.factory.CharacterFactoryMethod;
 import com.maxley.state.DangerState;
 import com.maxley.state.NormalState;
 import com.maxley.state.StrongState;
 
 public class FuturisticEnemyFactory extends CharacterFactoryMethod {
+
+    public static final FuturisticCharacterFactory instance = new FuturisticCharacterFactory();
 
     //TODO: Modificar para criar inimigos
     public Character createCharacter(double type) {
@@ -33,5 +37,9 @@ public class FuturisticEnemyFactory extends CharacterFactoryMethod {
         }
 
         return character;
+    }
+
+    public FuturisticCharacterFactory getInstance() {
+        return instance;
     }
 }
