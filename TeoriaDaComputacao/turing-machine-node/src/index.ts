@@ -142,4 +142,4 @@ export const runTuringMachine = (turingMachine: TuringMachine, word: string): vo
 const jsonObject = FileHandler.readFile('./turing-machine.json');
 const turingMachine = TuringMachine.convertFromJson(jsonObject);
 
-runTuringMachine(turingMachine, 'abacabaB');
+runTuringMachine(turingMachine, '11011011B');
